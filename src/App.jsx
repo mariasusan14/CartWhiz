@@ -12,7 +12,7 @@ import { ChakraProvider } from '@chakra-ui/provider'
 
 function App() {
   return (
-    <ChakraProvider>
+ 
       <Routes>
         <Route path="/" element={<Auth/>}/>
         <Route path="/discoverbooks" element={<DiscoverBooks/>}/>
@@ -21,8 +21,10 @@ function App() {
         <Route path="/tobereadlist" element={<ToBeReadList/>}/>
         <Route path="/groupchat" element={<GroupChat/>}/>         
         <Route path="/profile" element={<UserProfile/>}/>
-      </Routes> 
-      </ChakraProvider>
+      </Routes>     
+     
+  
+    
    
     
   )

@@ -1,13 +1,9 @@
-import { useState } from 'react'
-
+import {Auth} from './components/auth'
 import './App.css'
 
 function App() {
-  
-  
-
   return (
-    <h1>hello</h1>
+   <Auth/>
   )
 }
 

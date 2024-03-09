@@ -7,9 +7,11 @@ import BookList from './components/BookList'
 import ToBeReadList from './components/ToBeReadList'
 import GroupChat from './components/GroupChat'
 
+
+
 function App() {
   return (
-    <div>
+    <ChakraProvider>
       <Routes>
         <Route path="/" element={<Auth/>}/>
         <Route path="/discoverbooks" element={<DiscoverBooks/>}/>
@@ -19,8 +21,8 @@ function App() {
         <Route path="/groupchat" element={<GroupChat/>}/>         
         {/* <Route path="/profile" element={<Profile/>}/>*/}
       </Routes> 
-      
-    </div>
+      </ChakraProvider>
+   
     
   )
 }

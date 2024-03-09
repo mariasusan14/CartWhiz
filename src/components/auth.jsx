@@ -59,7 +59,7 @@ export const Auth = () => {
 
         console.log('User document created in Firestore:', userDocRef.id);
         console.log('User signed up successfully!');
-        //navigate(`/dashboardshop/${userId}`);
+        //navigate(`/dashboard/${userId}`);
       }
     } catch (error) {
       console.error(error);
@@ -74,7 +74,7 @@ export const Auth = () => {
       const userId = userCredential.user.uid;
 
       console.log('User logged in successfully!');
-      //navigate(`/dashboardshop/${userId}`);
+      //navigate(`/dashboard/${userId}`);
     } catch (error) {
       setError('Invalid email or password. Please try again.'); // Set login error message
       console.error(error);
@@ -145,5 +145,3 @@ export const Auth = () => {
     </div>
   );
 };
-
-

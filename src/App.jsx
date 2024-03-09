@@ -1,4 +1,4 @@
-import { Route,Routes } from 'react-router-dom'
+import {Auth} from './components/auth'
 import './App.css'
 import Dashboard from './components/Dashboard'
 import DiscoverBooks from './components/DiscoverBooks'
@@ -8,8 +8,7 @@ import GroupChat from './components/GroupChat'
 
 
 
-function App() {  
-
+function App() {
   return (
     <div>
       <h1>hello</h1>

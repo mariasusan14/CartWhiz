@@ -1,5 +1,6 @@
 import {Auth} from './components/auth'
 import './App.css'
+import {Route,Routes} from 'react-router-dom'
 import Dashboard from './components/Dashboard'
 import DiscoverBooks from './components/DiscoverBooks'
 import BookList from './components/BookList'
@@ -11,7 +12,6 @@ import GroupChat from './components/GroupChat'
 function App() {
   return (
     <div>
-      <h1>hello</h1>
       <Routes>
         <Route path="/" element={<Dashboard/>}/>
         <Route path="/discoverbooks" element={<DiscoverBooks/>}/>

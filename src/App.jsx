@@ -6,25 +6,24 @@ import DiscoverBooks from './components/DiscoverBooks'
 import BookList from './components/BookList'
 import ToBeReadList from './components/ToBeReadList'
 import GroupChat from './components/GroupChat'
-import { ChakraProvider } from '@chakra-ui/react'
+
 
 
 function App() {
   return (
     <ChakraProvider>
       <Routes>
-        <Route path="/" element={<Dashboard/>}/>
+        <Route path="/" element={<Auth/>}/>
         <Route path="/discoverbooks" element={<DiscoverBooks/>}/>
         <Route path="/dashboard/:userId" element={<Dashboard />}/> 
         <Route path="/mybooklist" element={<BookList/>}/>
         <Route path="/tobereadlist" element={<ToBeReadList/>}/>
-        <Route path="/groupchat" element={<GroupChat/>}/>        
-        {/* <Route path="/profile" element={<Profile/>}/> */}
+        <Route path="/groupchat" element={<GroupChat/>}/>         
+        {/* <Route path="/profile" element={<Profile/>}/>*/}
       </Routes> 
       </ChakraProvider>
    
     
   )
 }
-
 export default App

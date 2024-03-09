@@ -10,7 +10,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`sidebar-container ${isCollapsed ? 'collapsed' : ''} bg-blue-200 h-screen`}>
+    <div className={`sidebar-container fixed ${isCollapsed ? 'collapsed' : ''} bg-blue-200 h-screen`}>
       {!isCollapsed && <div className="brand-name">ImaginationInn</div>}
       <div className="toggle-btn" onClick={handleToggle}>
         {isCollapsed ? '>>' : '<<'}

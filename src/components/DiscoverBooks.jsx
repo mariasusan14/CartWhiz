@@ -24,8 +24,8 @@ const DiscoverBooks = () => {
 
   return (
     <div className="flex">
-      <Sidebar />
-      <div className="flex flex-col p-6 w-full">
+     <Sidebar />
+      <div className="flex flex-col p-6 w-full ml-40">
         <h2 className="text-2xl font-semibold mb-4">Discover Books</h2>
         <div className="grid grid-cols-4 gap-4">
           {books.map((book) => (

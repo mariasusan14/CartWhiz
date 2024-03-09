@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../config/firebase'; // Assuming you have already set up Firebase and initialized the Firestore instance
+import { db } from '../config/firebase';
 
 const UserProfileSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,7 +10,12 @@ const UserProfileSearch = () => {
   const handleSearch = async () => {
     try {
       // Search for the user based on username or email
-      const q = query(collection(db, 'users'), where('username', '==', searchTerm).orWhere('email', '==', searchTerm));
+      const q = query(
+        collection(db, 'user'),
+        
+        where('email', '==', searchTerm)
+      );
+
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.empty) {
@@ -24,7 +29,7 @@ const UserProfileSearch = () => {
         setError('');
       }
     } catch (error) {
-      console.error('Error searching for user:', error); 
+      console.error('Error searching for user:', error);
       setError('An error occurred while searching for the user');
     }
   };
@@ -44,7 +49,6 @@ const UserProfileSearch = () => {
           <h2>User Profile</h2>
           <p>Username: {searchResult.username}</p>
           <p>Email: {searchResult.email}</p>
-          {/* Display other user profile data here */}
         </div>
       )}
 

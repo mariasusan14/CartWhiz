@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import ToBeReadList from './components/ToBeReadList'
 import './App.css'
 
 function App() {
@@ -7,7 +8,12 @@ function App() {
   
 
   return (
-    <h1>hello</h1>
+    <div>
+      <h1>hello</h1>
+      
+      <ToBeReadList/>
+    </div>
+    
   )
 }
 

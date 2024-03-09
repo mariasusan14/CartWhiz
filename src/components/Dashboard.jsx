@@ -1,10 +1,10 @@
 import React from "react";
-const BookList = () => {
+const Dashboard = () => {
     return (
     <div >
-        BookList
+        Dashboard
     </div>
     );
   };
 
-  export default BookList;
+  export default Dashboard;

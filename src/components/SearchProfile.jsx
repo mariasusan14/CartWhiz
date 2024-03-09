@@ -2,55 +2,55 @@ import React, { useState } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase'; // Assuming you have already set up Firebase and initialized the Firestore instance
 
-const SearchUserProfile = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
+const UserProfileSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResult, setSearchResult] = useState(null);
+  const [error, setError] = useState('');
 
   const handleSearch = async () => {
     try {
-      const q = query(collection(db, 'users'), where('username', '==', searchQuery));
+      // Search for the user based on username or email
+      const q = query(collection(db, 'users'), where('username', '==', searchTerm).orWhere('email', '==', searchTerm));
       const querySnapshot = await getDocs(q);
-      const results = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setSearchResults(results);
+
+      if (querySnapshot.empty) {
+        // If no user found, display an error message
+        setSearchResult(null);
+        setError('User not found');
+      } else {
+        // If user found, display the user profile data
+        const userData = querySnapshot.docs[0].data();
+        setSearchResult(userData);
+        setError('');
+      }
     } catch (error) {
       console.error('Error searching for user:', error); 
+      setError('An error occurred while searching for the user');
     }
-  };
-
-  const handleSelectUser = (user) => {
-    setSelectedUser(user);
   };
 
   return (
     <div>
       <input
         type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Enter username"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Enter username or email"
       />
       <button onClick={handleSearch}>Search</button>
 
-      <div>
-        {searchResults.map(user => (
-          <div key={user.userId}>
-            {/* <p>{user.username}</p> */}<p>{user.fullName}</p>
-            <button onClick={() => handleSelectUser(user)}>View Profile</button>
-          </div>
-        ))}
-      </div>
-
-      {selectedUser && (
+      {searchResult && (
         <div>
           <h2>User Profile</h2>
-          <p>Username: {selectedUser.fullName}</p>
-          <p>Email: {selectedUser.email}</p>
-          {/* Display other profile details here */}
+          <p>Username: {searchResult.username}</p>
+          <p>Email: {searchResult.email}</p>
+          {/* Display other user profile data here */}
         </div>
       )}
+
+      {error && <p>{error}</p>}
     </div>
   );
 };
 
-export default SearchUserProfile;
+export default UserProfileSearch;

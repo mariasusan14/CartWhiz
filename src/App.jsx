@@ -7,24 +7,21 @@ import BookList from './components/BookList'
 import ToBeReadList from './components/ToBeReadList'
 import GroupChat from './components/GroupChat'
 
-
-
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Dashboard/>}/>
+        <Route path="/" element={<Auth/>}/>
         <Route path="/discoverbooks" element={<DiscoverBooks/>}/>
         <Route path="/dashboard/:userId" element={<Dashboard />}/> 
         <Route path="/mybooklist" element={<BookList/>}/>
         <Route path="/tobereadlist" element={<ToBeReadList/>}/>
-        <Route path="/groupchat" element={<GroupChat/>}/>        
-        {/* <Route path="/profile" element={<Profile/>}/> */}
+        <Route path="/groupchat" element={<GroupChat/>}/>         
+        {/* <Route path="/profile" element={<Profile/>}/>*/}
       </Routes> 
       
     </div>
     
   )
 }
-
 export default App

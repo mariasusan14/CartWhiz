@@ -28,7 +28,7 @@ const DiscoverBooks = () => {
           <div key={book.id} style={{ width: '25%', padding: '10px' }}>
             <Link to={`/book/${book.id}`}>
               <img
-                src={book.imageUrl}
+                src={book.imgURL}
                 alt={book.bookName}
                 style={{ width: '100%', height: 'auto' }}
               />

@@ -6,7 +6,8 @@ import DiscoverBooks from './components/DiscoverBooks'
 import BookList from './components/BookList'
 import ToBeReadList from './components/ToBeReadList'
 import GroupChat from './components/GroupChat'
-
+import UserProfile from './components/UserProfile'
+import { ChakraProvider } from '@chakra-ui/provider'
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         <Route path="/mybooklist" element={<BookList/>}/>
         <Route path="/tobereadlist" element={<ToBeReadList/>}/>
         <Route path="/groupchat" element={<GroupChat/>}/>         
-        {/* <Route path="/profile" element={<Profile/>}/>*/}
+        <Route path="/profile" element={<UserProfile/>}/>
       </Routes> 
       </ChakraProvider>
    

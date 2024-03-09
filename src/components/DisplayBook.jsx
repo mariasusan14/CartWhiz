@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { firestore } from '../services/firebase';
+import { useParams, Link } from 'react-router-dom';
+import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 const DisplayBook = () => {
   const { id } = useParams();
-  const [book, setBook] = useState(null);
+  const [book, setBook] = useState({});
   const [peopleReading, setPeopleReading] = useState(0);
 
   useEffect(() => {
     const fetchBookDetails = async () => {
-      const bookRef = firestore.collection('books').doc(id);
-
       try {
-        const doc = await bookRef.get();
+        const bookRef = doc(db, 'book', id);
+        const docSnap = await getDoc(bookRef);
 
-        if (doc.exists) {
-          const data = doc.data();
-          setBook(data);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setBook({ id: docSnap.id, ...data });
           setPeopleReading(data.peopleReading || 0);
         }
       } catch (error) {
@@ -28,9 +28,8 @@ const DisplayBook = () => {
   }, [id]);
 
   const handleReadClick = async () => {
-    // Increment the number of people reading and update in Firestore
     try {
-      await firestore.collection('books').doc(id).update({
+      await updateDoc(doc(db, 'book', id), {
         peopleReading: peopleReading + 1,
       });
 
@@ -41,10 +40,9 @@ const DisplayBook = () => {
   };
 
   const handleFinishReading = async () => {
-    // Decrement the number of people reading and update in Firestore
     if (peopleReading > 0) {
       try {
-        await firestore.collection('books').doc(id).update({
+        await updateDoc(doc(db, 'book', id), {
           peopleReading: peopleReading - 1,
         });
 
@@ -57,16 +55,14 @@ const DisplayBook = () => {
 
   return (
     <div>
-      {book && (
-        <div>
-          <h2>{book.title}</h2>
-          <img src={book.cover} alt={book.title} style={{ width: '50%', height: 'auto' }} />
-          <p>Author: {book.author}</p>
-          <p>Number of People Reading: {peopleReading}</p>
-          <button onClick={handleReadClick}>I am reading this book</button>
-          <button onClick={handleFinishReading}>Finish Reading</button>
-        </div>
-      )}
+      <h2>{book.title}</h2>
+      <img src={book.imageUrl} alt={book.title} style={{ width: '50%', height: 'auto' }} />
+      <p>Author: {book.author}</p>
+      <p>Number of People Reading: {peopleReading}</p>
+      <button onClick={handleReadClick}>I am reading this book</button>
+      <button onClick={handleFinishReading}>Finish Reading</button>
+      <br />
+      <Link to="/discover-books">Back to Discover Books</Link>
     </div>
   );
 };

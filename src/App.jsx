@@ -8,6 +8,7 @@ import ToBeReadList from './components/ToBeReadList'
 import GroupChat from './components/GroupChat'
 import UserProfile from './components/UserProfile'
 import { ChakraProvider } from '@chakra-ui/provider'
+import DisplayBook from './components/DisplayBook'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/tobereadlist" element={<ToBeReadList/>}/>
         <Route path="/groupchat" element={<GroupChat/>}/>         
         <Route path="/profile" element={<UserProfile/>}/>
+        <Route path="/book/:id" element={<DisplayBook/>}/>
       </Routes>     
      
   

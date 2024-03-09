@@ -1,0 +1,29 @@
+/* dashboard.css */
+.dashboard-container {
+    display: flex;
+  }
+  
+  .container {
+    flex-grow: 1;
+    padding: 20px; 
+  }
+    
+  .feature {
+    margin-bottom: 20px;
+  }
+  .feature {
+    margin-bottom: 20px;
+    background-color: #f8f4e3; /* Pastel beige */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  h2 {
+    color: #2a4d69; /* Dark blue */
+  }
+  
+  p {
+    color: #4b7447; /* Olive green */
+  }
+  

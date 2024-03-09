@@ -4,6 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import Sidebar from './Sidebar'; 
 import './discoverbooks.css'; // You may not need this anymore if you use Tailwind
+import SearchUserProfile from './SearchProfile';
 
 const DiscoverBooks = () => {
   const [books, setBooks] = useState([]);
@@ -26,6 +27,7 @@ const DiscoverBooks = () => {
     <div className="flex">
      <Sidebar />
       <div className="flex flex-col p-6 w-full ml-40">
+        <SearchUserProfile/>
         <h2 className="text-2xl font-semibold mb-4">Discover Books</h2>
         <div className="grid grid-cols-4 gap-4">
           {books.map((book) => (

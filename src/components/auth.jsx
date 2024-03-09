@@ -11,7 +11,6 @@ export const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [userType, setUserType] = useState('customer'); // Initialize userType with a default value
   const [mode, setMode] = useState('login');
   const [error, setError] = useState(null);
 
@@ -125,19 +124,7 @@ export const Auth = () => {
               />
             </label>
           )}
-          {mode === 'signup' && (
-            <label className="auth-label">
-              <FaUserTag />
-              <select
-                className="auth-input"
-                onChange={(e) => setUserType(e.target.value)}
-              >
-                <option value="customer">Customer</option>
-                <option value="shop">Shop</option>
-                <option value="collab">Collaborator</option>
-              </select>
-            </label>
-          )}
+          
         </div>
         <div>
           <button className="auth-button " onClick={mode === 'login' ? login : submitUser}>

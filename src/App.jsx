@@ -10,7 +10,6 @@ import UserProfile from './components/UserProfile'
 import { ChakraProvider } from '@chakra-ui/provider'
 import DisplayBook from './components/DisplayBook'
 
-
 function App() {
   return (
  
@@ -25,10 +24,6 @@ function App() {
         <Route path="/book/:id" element={<DisplayBook/>}/>
       </Routes>     
      
-  
-    
-   
-    
   )
 }
-export default App
+export default App;

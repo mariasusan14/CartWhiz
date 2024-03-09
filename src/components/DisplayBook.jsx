@@ -12,6 +12,7 @@ const DisplayBook = () => {
   const [isReading, setIsReading] = useState(false);
   const [isFinishReadingDisabled, setFinishReadingDisabled] = useState(true);
   const [isInTBR, setIsInTBR] = useState(false);
+  const [isInBL, setisInBL] = useState(false);
 
   useEffect(() => {
     const fetchBookDetails = async () => {
@@ -68,7 +69,28 @@ const DisplayBook = () => {
       console.error('Error updating people reading:', error);
     }
   };
-
+  const handleAddToBL = async () => {
+    try {
+      const userRef = collection(db, 'user');
+      const userQuery = query(userRef, where('userId', '==', auth.currentUser.uid));
+      const userSnapshot = await getDocs(userQuery);
+  
+      if (!isEmpty(userSnapshot.docs)) {
+        const userDoc = userSnapshot.docs[0];
+        if (!isInBL && book.bookName) {
+          await updateDoc(userDoc.ref, {
+            readBooks: [...(userDoc.data().readBooks || []), book.bookName],
+          });
+  
+          setisInBL(true);
+        }
+      } else {
+        console.error('User document does not exist');
+      }
+    } catch (error) {
+      console.error('Error adding to To Be Read List:', error);
+    }
+  };
   const handleAddToTBR = async () => {
     try {
       const userRef = collection(db, 'user');
@@ -133,12 +155,15 @@ const DisplayBook = () => {
       <button onClick={handleAddToTBR} disabled={isInTBR}>
         Add to TBR
       </button>
+      <button onClick={handleAddToBL} disabled={isInBL}>
+        Add to BL
+      </button>
       <button onClick={handleRemoveFromTBR} disabled={!isInTBR}>
         Remove from TBR
       </button>
       <br />
       <Link to="/discoverbooks">Back to Discover Books</Link>
-      <Link to="/discoverbooks">Back to Discover Books</Link>
+      
     </div>
   );
 };

@@ -56,13 +56,14 @@ const DisplayBook = () => {
   return (
     <div>
       <h2>{book.title}</h2>
-      <img src={book.imageUrl} alt={book.title} style={{ width: '50%', height: 'auto' }} />
+      <img src={book.imgURL} alt={book.title} style={{ width: '50%', height: 'auto' }} />
+      
       <p>Author: {book.author}</p>
       <p>Number of People Reading: {peopleReading}</p>
       <button onClick={handleReadClick}>I am reading this book</button>
       <button onClick={handleFinishReading}>Finish Reading</button>
       <br />
-      <Link to="/discover-books">Back to Discover Books</Link>
+      <Link to="/discoverbooks">Back to Discover Books</Link>
     </div>
   );
 };

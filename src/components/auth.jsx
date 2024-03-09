@@ -54,7 +54,7 @@ export const Auth = () => {
           fullName,
           email,
           password,
-          userType,
+          
         });
 
         console.log('User document created in Firestore:', userDocRef.id);

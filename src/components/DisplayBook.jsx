@@ -204,7 +204,7 @@ const DisplayBook = () => {
       
     </div>
   </div>
-  </div></div>
+  </div>
 );
 };
 

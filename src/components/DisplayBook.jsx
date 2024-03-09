@@ -150,7 +150,8 @@ const DisplayBook = () => {
 
     <p className="text-lg mt-7">Author: {book.author}</p>
     <p className="text-lg mt-5">Number of People Reading: {peopleReading}</p>
-   <div className='mt-10'><Rating /></div>
+   <div className='mt-10'><Rating initialRating={2.5}
+    readonly/></div>
     
 
   </div></div>
@@ -160,7 +161,9 @@ const DisplayBook = () => {
     <p>Rate the book!!!</p>
   </div>
 
-   <Rating/>
+   <Rating
+    
+   />
 
   </div>
   <div className="text-center mt-5">
@@ -193,10 +196,10 @@ const DisplayBook = () => {
     <button onClick={handleAddToTBR} disabled={isInTBR} className="bg-purple-500 text-white px-4 py-2 rounded-md mt-3">
         Add to TBR
       </button>
-      <button onClick={handleAddToBL} disabled={isInBL}>
+      <button onClick={handleAddToBL} disabled={isInBL} className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 ">
         Add to BL
       </button>
-      <button onClick={handleRemoveFromTBR} disabled={!isInTBR}>
+      <button onClick={handleRemoveFromTBR} disabled={!isInTBR} className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2">
         Remove from TBR
       </button>
       <br />

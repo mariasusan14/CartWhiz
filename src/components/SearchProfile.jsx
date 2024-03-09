@@ -14,7 +14,7 @@ const SearchUserProfile = () => {
       const results = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setSearchResults(results);
     } catch (error) {
-      console.error('Error searching for user:', error);
+      console.error('Error searching for user:', error); 
     }
   };
 

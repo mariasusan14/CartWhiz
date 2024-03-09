@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import Sidebar from './Sidebar'; 
-import './discoverbooks.css'; // You may not need this anymore if you use Tailwind
+import './discoverbooks.css'; 
 
 const DiscoverBooks = () => {
   const [books, setBooks] = useState([]);
@@ -15,7 +15,7 @@ const DiscoverBooks = () => {
         const booksData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setBooks(booksData);
       } catch (error) {
-        console.error('Error fetching books:', error);
+        console.error('Error fetching books:', error); 
       }
     };
 

@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./Sidebar.css"; // Import your CSS file for styling
+
 const Sidebar = () => {
-    return (
-        <div >
-        <div >ImaginationInn</div>
-        <ul>
-            <li><Link to="/discoverbooks">Discover Books</Link></li>
-            <li><Link to="/mybooklist">My Book List</Link></li>
-            <li><Link to="/tobereadlist">To Be Read List</Link></li>
-            <li><Link to="/groupchat">Group Chat</Link></li>
-            <li><Link to="/profile">Profile</Link></li>       
-        </ul>
-      </div>
-    );
+  const [isCollapsed, setCollapsed] = useState(false);
+
+  const handleToggle = () => {
+    setCollapsed(!isCollapsed);
   };
 
-  export default Sidebar;
+  return (
+    <div className={`sidebar-container ${isCollapsed ? 'collapsed' : ''}`}>
+      {!isCollapsed && <div className="brand-name">ImaginationInn</div>}
+      <div className="toggle-btn" onClick={handleToggle}>
+        {isCollapsed ? '>>' : '<<'}
+      </div>
+      {!isCollapsed && (
+        <ul className="nav-list">
+        <li className="nav-item"><Link to="/discoverbooks">Discover Books</Link></li>
+        <li className="nav-item"><Link to="/mybooklist">My Book List</Link></li>
+        <li className="nav-item"><Link to="/tobereadlist">To Be Read List</Link></li>
+        <li className="nav-item"><Link to="/groupchat">Group Chat</Link></li>
+        <li className="nav-item"><Link to="/profile">Profile</Link></li>
+      </ul>
+      )}
+      
+    </div>
+  );
+};
+
+export default Sidebar;

@@ -13,7 +13,6 @@ const BookList = () => {
       if (user) {
         // User is signed in
         const userRef = doc(db, "user", user.uid);
-        console.log(user.uid)
         fetchData(userRef);
       } else {
         // User is signed out
@@ -28,16 +27,18 @@ const BookList = () => {
   const fetchData = async (userRef) => {
     try {
       const docSnap = await getDoc(userRef);
-      let bookData = [];
 
       if (docSnap.exists()) {
-        bookData = docSnap.data().readBooks || [];
+        const data = docSnap.data();
+        const readBooksData = data.readBooks || [];
+
+        console.log("Data read from Firestore:", data);
+        console.log("Read Books:", readBooksData);
+
+        setReadBooks([...readBooksData]);
       } else {
-        
         console.log("No such document!");
       }
-
-      setReadBooks([...bookData]);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

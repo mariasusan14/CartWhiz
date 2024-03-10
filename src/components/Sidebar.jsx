@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import Logo from "../assets/logo.jpg"
 
 const Sidebar = () => {
   const [isCollapsed, setCollapsed] = useState(false);
@@ -12,7 +12,11 @@ const Sidebar = () => {
   return (
     <div className={`sidebar-container fixed ${isCollapsed ? 'collapsed' : ''} bg-blue-200 w-150 h-screen`}>
       {!isCollapsed && <div className="brand-name">ImaginationInn</div>}
-      <div className="toggle-btn" onClick={handleToggle}>
+      <img
+        src={Logo}
+        alt="logo"
+        style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover' }}
+      /><div className="toggle-btn" onClick={handleToggle}>
         {isCollapsed ? '>>' : '<<'}
       </div>
       {!isCollapsed && (

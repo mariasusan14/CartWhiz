@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { collection, doc, getDoc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
+import { px } from '@chakra-ui/breakpoint-utils';
 
 const ViewUser = () => {
   const { userId: currentUserId } = useParams();
@@ -57,7 +58,7 @@ const ViewUser = () => {
       {userData && (
         <div>
           <h2>User Profile</h2>
-          <img src={userData.imgURL} alt="Profile" />
+          <img  src={userData.imgURL} alt="Profile" />
           <p>Fullname: {userData.fullName}</p>
           <p>Email: {userData.email}</p>
           <h3>Read List</h3>

@@ -79,18 +79,20 @@ console.log(userId)
 
   return (
     <div className='flex'>
-      <Sidebar/>
-      <h2 className="text-2xl ml-40 font-semibold">Read book List</h2>
-      <div className="flex flex-col p-6 w-full ml-40">
-      <ul>
-        {tobeReadList.map((bookId) => ( 
-          <li key={bookId}>
-            {bookId}
-            
-          </li>
-        ))}
-      </ul></div>
+    <Sidebar/>
+    <div className="ml-40">
+      <h2 className="text-2xl font-semibold">Read book List</h2>
+      <div className="flex flex-col p-6 w-full">
+        <ul> 
+          {tobeReadList.map((bookId) => ( 
+            <li key={bookId}>
+              {bookId}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
+  </div>
   );
 };
 

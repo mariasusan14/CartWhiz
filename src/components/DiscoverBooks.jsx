@@ -8,7 +8,7 @@ import SearchUserProfile from './SearchProfile';
 
 const DiscoverBooks = () => {
   const [books, setBooks] = useState([]);
-
+ 
   useEffect(() => {
     const fetchBooks = async () => {
       try {

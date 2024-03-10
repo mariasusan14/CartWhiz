@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc, where, getDocs, collection } from 'firebase/firestore';
 import { db, auth } from '../config/firebase';
+import Sidebar from './Sidebar';
+import { pull } from 'lodash';
 
 const ToBeReadList = () => {
   
@@ -101,23 +103,26 @@ const ToBeReadList = () => {
   };
   
 
-  return (
-    <div>
-      <h2>To Be Read List</h2>
-      {console.log(tobeReadList)}
-      <ul>
-        {tobeReadList.map((bookId) => (
-          <li key={bookId}>
-            {bookId}
-            <button onClick={() => removeFromToBeRead(bookId)} disabled={false}>
-              Remove from To Be Read List
-            </button>
-          </li>
-        ))}
-      </ul>
+  return ( 
+    <div className='flex'>
+      <Sidebar/>
+      <div className="ml-40">
+        <h2 className="text-2xl font-semibold">To Read List</h2>
+        {console.log(tobeReadList)} 
+        <ul>
+          {tobeReadList.map((bookId) => (
+            <li key={bookId}>
+              {bookId}
+              <button onClick={() => removeFromToBeRead(bookId)} disabled={false} className="bg-purple-500 text-white px-4 py-2 ml-3 rounded-md mt-3">
+                Remove 
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
-
+  
 
 };
 

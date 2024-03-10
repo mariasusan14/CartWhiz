@@ -21,7 +21,7 @@ const UserProfileSearch = () => {
       if (querySnapshot.empty) {
         // If no user found, display an error message
         setSearchResult(null);
-        setError('User not found');
+        setError('User not found'); 
       } else {
         // If user found, display the user profile data
         const userData = querySnapshot.docs[0].data();

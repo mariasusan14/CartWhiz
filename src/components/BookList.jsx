@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc, where, getDocs, collection } from 'firebase/firestore';
 import { db, auth } from '../config/firebase';
+import Sidebar from './Sidebar';
 
 const ToBeReadList = () => {
   const [tobeReadList, setToBeReadList] = useState([]);
@@ -77,17 +78,21 @@ console.log(userId)
   };
 
   return (
-    <div>
-      <h2>Read Book List</h2>
-      <ul>
-        {tobeReadList.map((bookId) => ( 
-          <li key={bookId}>
-            {bookId}
-            
-          </li>
-        ))}
-      </ul>
+    <div className='flex'>
+    <Sidebar/>
+    <div className="ml-40">
+      <h2 className="text-2xl font-semibold">Read book List</h2>
+      <div className="flex flex-col p-6 w-full">
+        <ul> 
+          {tobeReadList.map((bookId) => ( 
+            <li key={bookId}>
+              {bookId}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
+  </div>
   );
 };
 

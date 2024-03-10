@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { collection, doc, getDoc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { px } from '@chakra-ui/breakpoint-utils';
+import Sidebar from './Sidebar';
 
 const ViewUser = () => {
   const { userId: currentUserId } = useParams();
@@ -54,23 +54,26 @@ const ViewUser = () => {
   }, [currentUserId]);
 
   return (
-    <div>
-      {userData && (
-        <div>
-          <h2>User Profile</h2>
-          <img  src={userData.imgURL} alt="Profile" />
-          <p>Fullname: {userData.fullName}</p>
-          <p>Email: {userData.email}</p>
-          <h3>Read List</h3>
-          <ul>
-            {userData.tobeRead &&
-              userData.tobeRead.map((bookId) => <li key={bookId}>{bookId}</li>)}
-          </ul>
-        </div>
-      )}
-
-      {error && <p>{error}</p>}
+    <div className='flex'>
+      <Sidebar/>
+    <div className="p-4">
+  {userData && (
+    <div className="border border-gray-300 p-4 rounded-lg ml-40">
+      <h2 className="text-xl font-semibold mb-2">User Profile</h2>
+      <img src={userData.imgURL} alt="Profile" className="rounded-full w-24 h-24 mb-4" />
+      <p className="mb-2"><span className="font-semibold">Fullname:</span> {userData.fullName}</p>
+      <p className="mb-2"><span className="font-semibold">Email:</span> {userData.email}</p>
+      <h3 className="text-lg font-semibold mt-4">Read List</h3>
+      <ul className="list-disc pl-6">
+        {userData.tobeRead &&
+          userData.tobeRead.map((bookId) => <li key={bookId}>{bookId}</li>)}
+      </ul>
     </div>
+  )}
+
+  {error && <p className="text-red-500 mt-4">{error}</p>}
+</div></div>
+
   );
 };
 

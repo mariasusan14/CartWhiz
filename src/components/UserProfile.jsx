@@ -1,8 +1,11 @@
 import React from 'react';
+import Sidebar from './Sidebar';
 
 const UserProfile = () => {
   return (
-    <div className="p-4 bg-purple-100 ml-4 mr-4">
+    <div className='flex '>
+        <Sidebar/>
+    <div className="p-4 bg-purple-100 ml-40 mr-4 mt-5">
       <div className="text-center mb-4">
         <h1 className="text-2xl">Profile Page</h1>
       </div>
@@ -30,7 +33,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div></div>
   );
 };
 

@@ -1,59 +1,96 @@
-// BookList.jsx
-import React, { useEffect, useState } from "react";
-import { doc, getDoc } from "@firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../config/firebase";
+import React, { useState, useEffect } from 'react';
+import { doc, getDoc, updateDoc, where, getDocs, collection } from 'firebase/firestore';
+import { db, auth } from '../config/firebase';
 
-const BookList = () => {
-  const [readBooks, setReadBooks] = useState([]);
-
+const ToBeReadList = () => {
+  const [tobeReadList, setToBeReadList] = useState([]);
+  const userId = auth.currentUser.uid;
+console.log(userId)
   useEffect(() => {
-    // Listen for changes in the authentication state
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in
-        const userRef = doc(db, "user", user.uid);
-        fetchData(userRef);
-      } else {
-        // User is signed out
-        console.log("User is not signed in.");
+    const fetchToBeReadList = async () => {
+      try {
+        // Check if user ID is defined
+        if (userId) {
+          // Fetch the user document where userId matches
+          const userQuerySnapshot = await getDocs(collection(db, 'user'), where('userId', '==', userId));
+
+          if (!userQuerySnapshot.empty) {
+            // Use the document ID of the first matching user
+            const userDocId = userQuerySnapshot.docs[0].id;
+            const userReference = doc(db, 'user', userDocId);
+
+            const userSnap = await getDoc(userReference);
+
+            if (userSnap.exists()) {
+              const userData = userSnap.data();
+              const tobeReadData = userData.readBooks || [];
+              setToBeReadList(tobeReadData);
+            } else {
+              console.log('User document does not exist or is empty.');
+            }
+          } else {
+            console.log('No user found with matching userId.');
+          }
+        } else {
+          console.log('User ID is not defined. Not fetching To Be Read List.');
+        }
+      } catch (error) {
+        console.error('Error fetching To Be Read List:', error);
       }
-    });
+    };
 
-    // Unsubscribe when the component unmounts
-    return () => unsubscribe();
-  }, []);
+    fetchToBeReadList();
+  }, [userId]);
 
-  const fetchData = async (userRef) => {
+  const removeFromToBeRead = async (bookId) => {
     try {
-      const docSnap = await getDoc(userRef);
+      if (tobeReadList.includes(bookId)) {
 
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        const readBooksData = data.readBooks || [];
+        const userQuerySnapshot = await getDocs(collection(db, 'user'), where('userId', '==', userId));
 
-        console.log("Data read from Firestore:", data);
-        console.log("Read Books:", readBooksData);
+        if (!userQuerySnapshot.empty) {
+          // Use the document ID of the first matching user
+          const userDocId = userQuerySnapshot.docs[0].id;
+        const userRef = doc(db, 'user', userDocId);
+        
 
-        setReadBooks([...readBooksData]);
-      } else {
-        console.log("No such document!");
+
+        // Update the Firestore document
+        await updateDoc(userRef, {
+          tobeRead: tobeReadList.filter((id) => id !== bookId),
+        });
+
+        // Fetch the updated tobeRead array
+        const updatedUserSnap = await getDoc(userRef);
+        if (updatedUserSnap.exists()) {
+          const updatedUserData = updatedUserSnap.data();
+          const updatedTobeReadData = updatedUserData.readBooks || [];
+          setToBeReadList(updatedTobeReadData);
+        } else {
+          console.log('Updated user document does not exist or is empty.');
+        }
       }
+    }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error('Error removing from To Be Read List:', error);
     }
   };
 
   return (
     <div>
-      <h2>Read Books</h2>
+      <h2>Read Book List</h2>
       <ul>
-        {readBooks.map((book, index) => (
-          <li key={index}>{book}</li>
+        {tobeReadList.map((bookId) => ( 
+          <li key={bookId}>
+            {bookId}
+            
+          </li>
         ))}
       </ul>
     </div>
   );
 };
 
-export default BookList;
+export default ToBeReadList;
+
+

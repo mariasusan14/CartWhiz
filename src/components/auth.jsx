@@ -4,7 +4,7 @@ import { collection, addDoc, getDocs, query, where } from '@firebase/firestore';
 import { auth, db } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaEnvelope, FaCheck, FaUserTag } from 'react-icons/fa';
-import './auth.css'
+import './auth.css';
 
 export const Auth = () => {
   const [fullName, setFullName] = useState('');
@@ -30,7 +30,7 @@ export const Auth = () => {
   };
 
   const validateSignUpFields = () => {
-    return fullName&&email && password && confirmPassword === password;
+    return fullName && email && password && confirmPassword === password;
   };
 
   const submitUser = async () => {
@@ -54,7 +54,6 @@ export const Auth = () => {
           fullName,
           email,
           password,
-          
         });
 
         console.log('User document created in Firestore:', userDocRef.id);
@@ -82,64 +81,80 @@ export const Auth = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="auth-container">
-        <div>
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-full max-w-xs">
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           {mode === 'signup' && (
-            <label className="auth-label">
-              <FaUser />
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                <FaUser className="inline mr-2" />
+                Full Name
+              </label>
               <input
-                className="auth-input"
-                placeholder="full name..."
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Full Name"
                 onChange={(e) => setFullName(e.target.value)}
               />
-            </label>
+            </div>
           )}
-          <label className="auth-label">
-            <FaEnvelope />
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              <FaEnvelope className="inline mr-2" />
+              Email
+            </label>
             <input
-              className="auth-input"
-              placeholder="email..."
-              type='email'
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="email"
+              placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
             />
-          </label>
-          <label className="auth-label">
-            <FaLock />
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              <FaLock className="inline mr-2" />
+              Password
+            </label>
             <input
-              className="auth-input"
-              placeholder="password..."
-              onChange={(e) => setPassword(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
             />
-          </label>
+          </div>
           {mode === 'signup' && (
-            <label className="auth-label">
-              <FaLock />
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                <FaLock className="inline mr-2" />
+                Confirm Password
+              </label>
               <input
-                className="auth-input"
-                placeholder="confirm password..."
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 type="password"
+                placeholder="Confirm Password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-            </label>
+            </div>
           )}
-          
-        </div>
-        <div>
-          <button className="auth-button " onClick={mode === 'login' ? login : submitUser}>
-            {mode === 'login' ? 'Login' : 'Sign Up'}
-          </button>
-        </div>
-        <div>
-          {mode === 'login' && (
-            <label className="auth-label">
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={mode === 'login' ? login : submitUser}
+            >
+              {mode === 'login' ? 'Sign In' : 'Sign Up'}
+            </button>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              <input
+                className="mr-2 leading-tight"
+                type="checkbox"
+                onChange={handleToggleMode}
+              />
               Create a new account
-              <input className="auth-checkbox" type="checkbox" onChange={handleToggleMode} />
             </label>
+          </div>
+          {error && (
+            <p className="text-red-500 text-xs italic mt-4">{error}</p>
           )}
-
-          {error && <div className="error-message">{error}</div>}
         </div>
       </div>
     </div>

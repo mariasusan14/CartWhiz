@@ -84,10 +84,10 @@ console.log(userId)
       <h2 className="text-2xl font-semibold">Read book List</h2>
       <div className="flex flex-col p-6 w-full">
         <ul> 
-          {tobeReadList.map((bookId) => ( 
+          {tobeReadList.map((bookId) => (  
             <li key={bookId}>
               {bookId}
-            </li>
+            </li>  
           ))}
         </ul>
       </div>

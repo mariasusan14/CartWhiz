@@ -197,7 +197,7 @@ const DisplayBook = () => {
         Add to TBR
       </button>
       <button onClick={handleAddToBL} disabled={isInBL} className="bg-blue-500 text-white px-4 py-2 rounded-md mt-2 ">
-        Add to BL
+        Add to Read List
       </button>
       <button onClick={handleRemoveFromTBR} disabled={!isInTBR} className="bg-blue-500 text-white px-4 py-2 rounded-md mt-2">
         Remove from TBR

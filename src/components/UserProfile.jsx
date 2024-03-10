@@ -34,7 +34,7 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <div className="p-4 bg-purple-100 ml-4 mr-4">
+    <div className=" bg-purple-100 h-screen mr-4">
     <Sidebar/>
       <div className="text-center mb-4">
         <h1 className="text-2xl">Profile Page</h1>

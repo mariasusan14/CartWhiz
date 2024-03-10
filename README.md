@@ -17,5 +17,9 @@ Welcome to ImaginationInn! This platform is designed to provide a collaborative 
 - **Firestore**: A NoSQL cloud database by Firebase for storing user data and book information.
 - **Socket.io**: A JavaScript library for real-time web applications with bidirectional communication.
 
+## How to run
 
+-git clone https://github.com/mariasusan14/ImaginationInn.git
+-npm i
+-npm run dev
 

@@ -34,7 +34,7 @@ const DiscoverBooks = () => {
             <div key={book.id} className="border rounded-lg overflow-hidden flex flex-col items-center">
               <Link to={`/book/${book.id}`} className="block">
                 <img
-                  src={book.imgURL}
+                  src={book.imgURL} 
                   alt={book.bookName}
                   className="w-full h-64 object-contain"
                 />
@@ -46,6 +46,6 @@ const DiscoverBooks = () => {
       </div>
     </div>
   );
-};
+}; 
  
 export default DiscoverBooks;

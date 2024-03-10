@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc, where, getDocs, collection } from 'firebase/firestore';
 import { db, auth } from '../config/firebase';
+import Sidebar from './Sidebar';
 
 const ToBeReadList = () => {
   
@@ -101,10 +102,11 @@ const ToBeReadList = () => {
   };
   
 
-  return (
-    <div>
-      <h2>To Be Read List</h2>
-      {console.log(tobeReadList)}
+  return ( 
+    <div className='flex'>
+      <Sidebar/>
+      <h2 className="text-2xl ml-40 font-semibold">To Read List</h2>
+      {console.log(tobeReadList)} 
       <ul>
         {tobeReadList.map((bookId) => (
           <li key={bookId}>

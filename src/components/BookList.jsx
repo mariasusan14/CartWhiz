@@ -1,31 +1,48 @@
 // BookList.jsx
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../config/firebase"; 
+import { doc, getDoc } from "@firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../config/firebase";
 
 const BookList = () => {
   const [readBooks, setReadBooks] = useState([]);
 
   useEffect(() => {
-    const user = auth.currentUser;
+    // Listen for changes in the authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        const userRef = doc(db, "user", user.uid);
+        fetchData(userRef);
+      } else {
+        // User is signed out
+        console.log("User is not signed in.");
+      }
+    });
 
-    if (user) {
-      const userRef = db.collection("users").doc(user.uid);
-
-      userRef
-        .get()
-        .then((doc) => {
-          if (doc.exists()) {
-            const data = doc.data();
-            setReadBooks(data.readBooks || []);
-          } else {
-            console.log("No such document!");
-          }
-        })
-        .catch((error) => {
-          console.error("Error getting document:", error.message);
-        });
-    }
+    // Unsubscribe when the component unmounts
+    return () => unsubscribe();
   }, []);
+
+  const fetchData = async (userRef) => {
+    try {
+      const docSnap = await getDoc(userRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        const readBooksData = data.readBooks || [];
+
+        console.log("Data read from Firestore:", data);
+        console.log("Read Books:", readBooksData);
+
+        setReadBooks([...readBooksData]);
+      } else {
+        console.log("No such document!");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <div>

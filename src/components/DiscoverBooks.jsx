@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
+import Sidebar from './Sidebar'; 
+import './discoverbooks.css'; // You may not need this anymore if you use Tailwind
 
 const DiscoverBooks = () => {
   const [books, setBooks] = useState([]);
@@ -21,21 +23,24 @@ const DiscoverBooks = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Discover Book</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {books.map((book) => (
-          <div key={book.id} style={{ width: '25%', padding: '10px' }}>
-            <Link to={`/book/${book.id}`}>
-              <img
-                src={book.imgURL}
-                alt={book.bookName}
-                style={{ width: '100%', height: 'auto' }}
-              />
-              <p>{book.bookName}</p>
-            </Link>
-          </div>
-        ))}
+    <div className="flex">
+     <Sidebar />
+      <div className="flex flex-col p-6 w-full ml-40">
+        <h2 className="text-2xl font-semibold mb-4">Discover Books</h2>
+        <div className="grid grid-cols-4 gap-4">
+          {books.map((book) => (
+            <div key={book.id} className="border rounded-lg overflow-hidden flex flex-col items-center">
+              <Link to={`/book/${book.id}`} className="block">
+                <img
+                  src={book.imgURL}
+                  alt={book.bookName}
+                  className="w-full h-64 object-contain"
+                />
+              </Link>
+              <p className="text-lg font-semibold p-2">{book.bookName}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

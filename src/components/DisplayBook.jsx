@@ -138,6 +138,7 @@ const DisplayBook = () => {
       </button>
       <br />
       <Link to="/discoverbooks">Back to Discover Books</Link>
+      <Link to="/discoverbooks">Back to Discover Books</Link>
     </div>
   );
 };

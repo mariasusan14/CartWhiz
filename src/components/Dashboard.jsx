@@ -5,7 +5,7 @@ const Dashboard = () => {
     return (
     <div className="dashboard-container">
         <Sidebar/>
-        
+        <div className="ml-40">
         <div className="container">
             <div className="feature">
             <h2>Discover Books</h2>
@@ -18,6 +18,7 @@ const Dashboard = () => {
             <div className="feature">
             <h2>Build Your Book List</h2>
             <p>Create and manage your book list to keep track of what you want to read.</p>
+            </div>
             </div>
         </div>
     

@@ -19,7 +19,7 @@ const Sidebar = () => {
         <ul className="nav-list">
         <li className="nav-item"><Link to="/discoverbooks">Discover Books</Link></li>
         <li className="nav-item"><Link to="/mybooklist">My Book List</Link></li>
-        <li className="nav-item"><Link to="/tobereadlist">To Be Read List</Link></li>
+        <li className="nav-item"><Link to="/tobereadlist">TBR</Link></li>
         <li className="nav-item"><Link to="/groupchat">Group Chat</Link></li>
         <li className="nav-item"><Link to="/profile">Profile</Link></li>
       </ul>

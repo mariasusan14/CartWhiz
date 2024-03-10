@@ -5,7 +5,7 @@ import { db, auth } from '../config/firebase';
 const ToBeReadList = () => {
   const [tobeReadList, setToBeReadList] = useState([]);
   const userId = auth.currentUser.uid;
-
+console.log(userId)
   useEffect(() => {
     const fetchToBeReadList = async () => {
       try {

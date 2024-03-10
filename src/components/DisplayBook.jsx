@@ -134,8 +134,11 @@ const DisplayBook = () => {
   </div></div>
   <div className="flex flex-col items-center ml-40">
   <div className="text-center mt-5">
-  <div className="flex justify-center mb-4"></div>
+  <div className="flex justify-center mb-4"></div><div className="text-center mb-6 mt-5">
+    <p>Rate the book!!!</p>
+  </div>
 
+   <Rating/>
 
   </div>
   <div className="text-center mt-5">
@@ -165,14 +168,14 @@ const DisplayBook = () => {
         {isFinishReadingDisabled ? 'Finish Reading' : 'Already Read'}
       </button>
     </div>
-    <button onClick={handleAddToTBR} disabled={isInTBR}>
+    <button onClick={handleAddToTBR} disabled={isInTBR} className="bg-purple-500 text-white px-4 py-2 rounded-md mt-3">
         Add to TBR
       </button>
-      <button onClick={handleRemoveFromTBR} disabled={!isInTBR}>
+      <button onClick={handleRemoveFromTBR} disabled={!isInTBR} className="bg-purple-500 text-white px-4 py-2 rounded-md mt-3">
         Remove from TBR
       </button>
       <br />
-  <div className="mt-4">
+  <div className="">
       <Link to="/discoverbooks" className="text-blue-500 mr-4">Back to Discover Books</Link>
      
     </div>

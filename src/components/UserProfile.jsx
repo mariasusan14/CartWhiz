@@ -1,11 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { doc, getDoc, query, where, collection, getDocs } from 'firebase/firestore';
+import { auth, db } from '../config/firebase';
 import Sidebar from './Sidebar';
 
 const UserProfile = () => {
+  const [userDetails, setUserDetails] = useState({
+    email: '',
+    fullName: '',
+  });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userRef = collection(db, 'user');
+        const userQuery = query(userRef, where('userId', '==', auth.currentUser.uid));
+        const userSnapshot = await getDocs(userQuery);
+
+        if (userSnapshot.size === 1) {
+          const userData = userSnapshot.docs[0].data();
+          setUserDetails({
+            email: userData.email,
+            fullName: userData.fullName,
+          });
+        } else {
+          console.error('User document not found or multiple documents found');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
-    <div className='flex '>
-        <Sidebar/>
-    <div className="p-4 bg-purple-100 ml-40 mr-4 mt-5">
+    <div className="p-4 bg-purple-100 ml-4 mr-4">
+    <Sidebar/>
       <div className="text-center mb-4">
         <h1 className="text-2xl">Profile Page</h1>
       </div>
@@ -13,13 +43,13 @@ const UserProfile = () => {
         <img
           className="rounded-full w-32 h-32"
           src="https://bit.ly/dan-abramov"
-          alt="Dan Abramov"
+          alt="Profile"
         />
       </div>
       <div className="ml-4 text-center">
         <div className="flex flex-col">
-          <p className="text-xl ">John Doe</p>
-          <p className="text-gray-500">john.doe@example.com</p>
+          <p className="text-xl">{userDetails.fullName}</p>
+          <p className="text-gray-500">{userDetails.email}</p>
         </div>
       </div>
       <div className="text-center mt-5">
@@ -33,10 +63,8 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-    </div></div>
+    </div>
   );
 };
 
 export default UserProfile;
-
-

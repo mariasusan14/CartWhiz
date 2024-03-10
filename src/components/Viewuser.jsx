@@ -58,7 +58,7 @@ const ViewUser = () => {
         <div>
           <h2>User Profile</h2>
           <img src={userData.imgURL} alt="Profile" />
-          <p>Fullname: {userData.fullname}</p>
+          <p>Fullname: {userData.fullName}</p>
           <p>Email: {userData.email}</p>
           <h3>Read List</h3>
           <ul>

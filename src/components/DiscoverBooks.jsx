@@ -47,5 +47,5 @@ const DiscoverBooks = () => {
     </div>
   );
 };
-
+ 
 export default DiscoverBooks;
